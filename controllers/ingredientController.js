@@ -44,7 +44,7 @@ router.get('/:id/edit', (req, res) => {
 router.post('/', (req, res) => {
 	Ingredient.create(req.body, (err, newIngredient) => {
 		if (err) return res.send(err)
-		res.redirect('/ingredient')
+		res.redirect('/ingredients')
 	})
 })
 
@@ -58,7 +58,7 @@ router.put('/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
 	Ingredient.findByIdAndDelete(req.params.id, (err, deletedIngredient) => {
 		if (err) return res.send(err)
-		res.redirect('/ingredient')
+		res.redirect('/ingredients')
 	})
 })
 

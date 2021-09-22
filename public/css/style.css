@@ -1,0 +1,37 @@
+:root {
+	--blue-clr: #6F9FFF;
+	--dark-clr: #424656;
+	--gray-clr: #A6ABBD;
+	--pink-clr: #FA768F;
+	--dark-blue-clr: #596C9E;
+}
+
+body {
+	background: var(--dark-blue-clr);
+	
+}
+
+header {
+	font-family: "AppleGothic";
+}
+
+.container {
+	background: linear-gradient(
+		90deg, 
+		var(--dark-blue-clr),
+		var(--blue-clr),
+		var(--blue-clr),
+		var(--dark-blue-clr));
+	padding: 0;
+	
+	height: 80%;
+}
+
+nav {
+	background: var(--dark-clr);
+}
+
+a {
+	color: rgba(255,255,255,.55);
+}
+
