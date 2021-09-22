@@ -1,0 +1,25 @@
+<%- include('./partials/header.ejs') %>
+	<h1 class="p-5 pb-8"><%=ingredient.name%></h1>
+	<div class="card align-items-center" style="width: 100%">
+		<img class="card-img-top w-25"
+		<% if (ingredient.img) { %>
+			src="<%=ingredient.img%>"
+			alt="Image of <%=ingredient.name%>"
+		<% } else { %>
+			src="/images/noImgAvailable.jpeg"
+			alt="Image missing"
+		<% } %>
+		>
+		<div class="card-body d-flex flex-column align-items-center">
+			<p class="card-text">Quantity: <%= ingredient.qty %></p>
+			<a class="" href="/ingredients/<%=ingredient.id%>/edit"><button class="btn btn-primary btn-sm">Edit</button></a>
+			<form 
+				method="POST" 
+				action="/ingredients/<%=ingredient.id%>?_method=DELETE">
+				<button class="btn btn-danger btn-sm">Delete</button>
+			</form>
+		</div>
+
+		
+	</div>
+<%- include('./partials/footer.ejs') %>

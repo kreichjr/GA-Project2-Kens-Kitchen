@@ -35,3 +35,22 @@ a {
 	color: rgba(255,255,255,.55);
 }
 
+.ken-bg-blue {
+	background: var(--blue-clr);
+}
+
+.ken-bg-gray {
+	background: var(--gray-clr);
+}
+
+.ken-bg-pink {
+	background: var(--pink-clr);
+}
+
+.ken-bg-black {
+	background: var(--dark-clr);
+}
+
+.ken-bg-dark-blue {
+	background: var(--dark-blue-clr);
+}
