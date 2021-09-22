@@ -5,7 +5,8 @@ const {Schema, model} = mongoose
 let ingredientSchema = new Schema({
 	name: {
 		type: String,
-		required: true
+		required: true,
+		unique: true
 	},
 	qty: {
 		type: Number,

@@ -10,39 +10,56 @@ const ingredientSeed = require('../models/ingredientSeed')
 
 // Routes
 router.get('/', (req, res) => {
-	res.send('You hit the index route!')
+	Ingredient.find({}, (err, foundIngredients) => {
+		if (err) return res.send(err)
+		res.render('index.ejs', {ingredients: foundIngredients})
+	})
 })
 
 router.get('/new', (req, res) => {
-	res.send('You hit the new route!')
+	res.render('new.ejs')
 })
 
 router.get('/seed', (req, res) => {
 	Ingredient.create(ingredientSeed, (err, createdIngredients) => {
 		if (err) return res.send(err)
-		res.redirect('/')
+		res.redirect('/ingredients')
 	})
-	res.redirect('/ingredients')
 })
 
 router.get('/:id', (req, res) => {
-	res.send('You hit the show route!')
+	Ingredient.findById(req.params.id, (err, foundIngredient) => {
+		if (err) return res.send(err)
+		res.render('show.ejs', {ingredient: foundIngredient})
+	})
 })
 
 router.get('/:id/edit', (req, res) => {
-	res.send('You hit the edit route!')
+	Ingredient.findById(req.params.id, (err, foundIngredient) => {
+		if (err) return res.send(err)
+		res.render('edit.ejs', {ingredient: foundIngredient})
+	})
 })
 
 router.post('/', (req, res) => {
-	res.send('You hit the create route!')
+	Ingredient.create(req.body, (err, newIngredient) => {
+		if (err) return res.send(err)
+		res.redirect('/ingredient')
+	})
 })
 
 router.put('/:id', (req, res) => {
-	res.send('You hit the update route!')
+	Ingredient.findByIdAndUpdate(req.params.id, req.body, {new: true}, (err, updatedIngredient) => {
+		if (err) return res.send(err)
+		res.redirect(`/ingredients/${req.params.id}`)
+	})
 })
 
 router.delete('/:id', (req, res) => {
-	res.send('You hit the delete route!')
+	Ingredient.findByIdAndDelete(req.params.id, (err, deletedIngredient) => {
+		if (err) return res.send(err)
+		res.redirect('/ingredient')
+	})
 })
 
 module.exports = router
