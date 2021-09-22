@@ -12,12 +12,12 @@ const ingredientSeed = require('../models/ingredientSeed')
 router.get('/', (req, res) => {
 	Ingredient.find({}, (err, foundIngredients) => {
 		if (err) return res.send(err)
-		res.render('index.ejs', {ingredients: foundIngredients})
+		res.render('ingredients/index.ejs', {ingredients: foundIngredients})
 	})
 })
 
 router.get('/new', (req, res) => {
-	res.render('new.ejs')
+	res.render('ingredients/new.ejs')
 })
 
 router.get('/seed', (req, res) => {
@@ -30,18 +30,19 @@ router.get('/seed', (req, res) => {
 router.get('/:id', (req, res) => {
 	Ingredient.findById(req.params.id, (err, foundIngredient) => {
 		if (err) return res.send(err)
-		res.render('show.ejs', {ingredient: foundIngredient})
+		res.render('ingredients/show.ejs', {ingredient: foundIngredient})
 	})
 })
 
 router.get('/:id/edit', (req, res) => {
 	Ingredient.findById(req.params.id, (err, foundIngredient) => {
 		if (err) return res.send(err)
-		res.render('edit.ejs', {ingredient: foundIngredient})
+		res.render('ingredients/edit.ejs', {ingredient: foundIngredient})
 	})
 })
 
 router.post('/', (req, res) => {
+	console.log(req.body)
 	Ingredient.create(req.body, (err, newIngredient) => {
 		if (err) return res.send(err)
 		res.redirect('/ingredients')

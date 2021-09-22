@@ -35,6 +35,11 @@ a {
 	color: rgba(255,255,255,.55);
 }
 
+.input-container label {
+	display: block;
+	margin-top: .75rem;
+}
+
 .ken-bg-blue {
 	background: var(--blue-clr);
 }

@@ -1,0 +1,20 @@
+<%- include('../partials/header.ejs') %>
+	<h1 class="p-5 pb-8">Edit Ingredient</h1>
+	<div class="card w-100 align-items-center">
+		<form class="w-75" method="POST" action="/ingredients/<%=ingredient.id%>?_method=PUT">
+			<div class="input-container">
+				<label for="name">Name</label>
+				<input class="w-100" type="text" name="name" id="name" value="<%=ingredient.name%>" autofocus required>
+			</div>
+			<div class="input-container">
+				<label for="qty">Quantity</label>
+				<input class="w-100" type="number" name="qty" id="qty" value="<%=ingredient.qty%>" required>
+			</div>
+			<div class="input-container">
+				<label for="img">Image Url</label>
+				<input class="w-100" type="url" name="img" id="img" value="<%=ingredient.img%>">
+			</div>
+			<button type="submit" class="btn btn-primary w-100 mt-2">Update Ingredient</button>
+		</form>
+	</div>
+<%- include('../partials/footer.ejs') %>
