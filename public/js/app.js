@@ -10,6 +10,12 @@ module.exports = {
 			let userBarText = `<p><a href="/users/register">Create an account</a> or <a href="/users/signin">Sign in</a><p>`
 			return userBarText
 		}
+	},
+	enableIfAdmin: (user) => {
+		if (user && user.admin) {
+			return ""
+		}
+		return "disabled"
 	}
 }
 

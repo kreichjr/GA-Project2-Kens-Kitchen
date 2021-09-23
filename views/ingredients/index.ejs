@@ -15,12 +15,15 @@
 					<tr>
 						<td><a class="" href="/ingredients/<%=ingredient.id%>"><%= ingredient.name %></a></td>
 						<td><%= ingredient.qty  %></td>
-						<td><a class="" href="/ingredients/<%=ingredient.id%>/edit"><button class="btn btn-primary btn-sm">Edit</button></a></td>
+						<td>
+							<form method="GET" action="/ingredients/<%=ingredient.id%>/edit"><button class="btn btn-primary btn-sm" <%-util.enableIfAdmin(currentUser)%>>Edit</button>
+							</form>
+						</td>
 						<td>
 							<form 
 								method="POST" 
 								action="/ingredients/<%=ingredient.id%>?_method=DELETE">
-								<button class="btn btn-danger btn-sm">Delete</button>
+								<button class="btn btn-danger btn-sm" <%-util.enableIfAdmin(currentUser)%>>Delete</button>
 							</form>
 						</td>
 					</tr>	

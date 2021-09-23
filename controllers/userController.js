@@ -41,7 +41,22 @@ router.get('/signin', (req, res) => {
 })
 
 router.post('/signin', (req, res) => {
-	
+	User.findOne({username: req.body.username}, (err, foundUser) => {
+		if (err) return res.send(err)
+		if (!foundUser) {
+			req.session.message = 'Invalid Username or Password'
+			res.redirect('/users/signin')
+			return
+		}
+		const validLogin = bcrypt.compareSync(req.body.password, foundUser.password)
+		if (!validLogin) {
+			req.session.message = 'Invalid Username or Password'
+			res.redirect('/users/signin')
+			return
+		}
+		req.session.currentUser = foundUser
+		res.redirect('/ingredients')
+	})
 })
 
 router.get('/signout', (req, res) => {
@@ -51,8 +66,10 @@ router.get('/signout', (req, res) => {
 
 router.get('/setMeAsAdmin', (req, res) => {
 	if (req.session.currentUser) {
-		User.findByIdAndUpdate(currentUser._id, {$set: {admin: true}}, {new: true}, (err, updatedUser) => {
+		req.session.currentUser.admin = true
+		User.findByIdAndUpdate(req.session.currentUser._id, req.session.currentUser, {new: true}, (err, updatedUser) => {
 			if (err) return res.send(err)
+			console.log('UPDATED USER: ', updatedUser)
 			res.redirect('/ingredients')
 		})
 	}
