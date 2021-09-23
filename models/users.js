@@ -13,7 +13,15 @@ const userSchema = new Schema({
 	},
 	recipes: [{
 		type: Schema.Types.ObjectId,
-		ref: 'Ingredient',
+		ref: 'Recipe',
 		default: []
-	}]
+	}],
+	admin: {
+		type: Boolean,
+		default: false
+	}
 })
+
+const User = model('User', userSchema)
+
+module.exports = User

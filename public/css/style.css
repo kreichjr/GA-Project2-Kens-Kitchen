@@ -51,6 +51,12 @@ a {
 	margin-top: .75rem;
 }
 
+.reg-error {
+	color: darkred;
+	font-size: 16px;
+	font-style: italic;
+}
+
 .ken-bg-blue {
 	background: var(--blue-clr);
 }

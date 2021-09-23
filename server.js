@@ -47,6 +47,11 @@ app.use((req, res, next) => {
 	res.locals.currentUser = req.session.currentUser
 	next()
 })
+app.use((req, res, next) => {
+	res.locals.message = req.session.message
+	req.session.message = ''
+	next()
+})
 
 // Helper Functions for EJS
 app.locals.util = require('./public/js/app.js')
@@ -55,6 +60,9 @@ app.locals.util = require('./public/js/app.js')
 // Controllers
 const ingredientController = require('./controllers/ingredientController')
 app.use('/ingredients', ingredientController)
+
+const userController = require('./controllers/userController')
+app.use('/users', userController)
 
 
 // App Start
