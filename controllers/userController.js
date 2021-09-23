@@ -11,15 +11,6 @@ router.get('/register', (req, res) => {
 	res.render('users/register.ejs')
 })
 
-router.get('/setMeAsAdmin', (req, res) => {
-	if (req.session.currentUser) {
-		User.findByIdAndUpdate(currentUser._id, {$set: {admin: true}}, {new: true}, (err, updatedUser) => {
-			if (err) return res.send(err)
-			res.redirect('/ingredients')
-		})
-	}
-})
-
 router.post('/register', (req, res) => {
 	if (req.body.password !== req.body.verifyPassword) {
 		req.session.message = 'Password and Verify Password do not match'
@@ -45,6 +36,31 @@ router.post('/register', (req, res) => {
 	})
 })
 
+router.get('/signin', (req, res) => {
+	res.render('users/signin.ejs')
+})
 
+router.post('/signin', (req, res) => {
+	
+})
+
+router.get('/signout', (req, res) => {
+	req.session.destroy()
+	res.redirect('/ingredients')
+})
+
+router.get('/setMeAsAdmin', (req, res) => {
+	if (req.session.currentUser) {
+		User.findByIdAndUpdate(currentUser._id, {$set: {admin: true}}, {new: true}, (err, updatedUser) => {
+			if (err) return res.send(err)
+			res.redirect('/ingredients')
+		})
+	}
+})
+
+router.get('/dropUsers', (req, res) => {
+	User.collection.drop()
+	res.redirect('/ingredients')
+})
 
 module.exports = router
