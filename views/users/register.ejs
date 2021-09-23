@@ -1,8 +1,11 @@
 <%- include('../partials/header.ejs') %>
 	<h1 class="p-5 pb-8">Create New User</h1>
 	<div class="card w-100 align-items-center">
-		<p class="reg-error"><%=message%></p>
-		<form class="w-50" method="POST" action="/users">
+		<% if (message) { %>
+			<p class="reg-error"><%=message%></p>
+		<% } %>
+		
+		<form class="w-50" method="POST" action="/users/register">
 			<div class="input-container">
 				<label for="username">Username</label>
 				<input class="w-100" type="text" name="username" id="username" autofocus required>
@@ -12,8 +15,8 @@
 				<input class="w-100" type="password" name="password" id="password" required>
 			</div>
 			<div class="input-container">
-				<label for="verify-password">Verify Password</label>
-				<input class="w-100" type="password" name="verify-password" id="verify-password" required>
+				<label for="verifyPassword">Verify Password</label>
+				<input class="w-100" type="password" name="verifyPassword" id="verifyPassword" required>
 			</div>
 			<button type="submit" class="btn btn-primary w-100 mt-2">Create User</button>
 		</form>
