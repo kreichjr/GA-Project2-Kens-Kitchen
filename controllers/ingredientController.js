@@ -10,6 +10,7 @@ const ingredientSeed = require('../models/ingredientSeed')
 
 // Routes
 router.get('/', (req, res) => {
+	console.log(req.session)
 	Ingredient.find({}, (err, foundIngredients) => {
 		if (err) return res.send(err)
 		res.render('ingredients/index.ejs', {ingredients: foundIngredients})
@@ -42,7 +43,6 @@ router.get('/:id/edit', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-	console.log(req.body)
 	Ingredient.create(req.body, (err, newIngredient) => {
 		if (err) return res.send(err)
 		res.redirect('/ingredients')

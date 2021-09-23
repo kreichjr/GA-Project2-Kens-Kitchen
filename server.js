@@ -9,6 +9,11 @@ const PORT = process.env.PORT
 const methodOverride = require('method-override')
 
 
+// Session Variables
+const session = require('express-session')
+const SESSION_SECRET = process.env.SESSION_SECRET
+
+
 // Mongoose Variables
 const mongoose = require('mongoose')
 const db = mongoose.connection
@@ -33,6 +38,18 @@ app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 app.use(methodOverride('_method'))
 app.use(express.static('public'))
+app.use(session({
+	secret: SESSION_SECRET,
+	resave: false,
+	saveUninitialized: false
+}))
+app.use((req, res, next) => {
+	res.locals.currentUser = req.session.currentUser
+	next()
+})
+
+// Helper Functions for EJS
+app.locals.util = require('./public/js/app.js')
 
 
 // Controllers

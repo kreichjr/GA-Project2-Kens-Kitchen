@@ -13,12 +13,23 @@ body {
 
 header {
 	font-family: "AppleGothic";
+	position: relative;
+}
+
+.user-bar {
+	position: absolute;
+	display: flex;
+	justify-content: right;
+	width: 100%;
+	top: 100%;
+	right: 0;
 }
 
 .container {
 	background: linear-gradient(
 		90deg, 
 		var(--dark-blue-clr),
+		var(--blue-clr),
 		var(--blue-clr),
 		var(--blue-clr),
 		var(--dark-blue-clr));
