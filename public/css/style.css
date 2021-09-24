@@ -7,7 +7,14 @@
 }
 
 body {
-	background: var(--dark-blue-clr);
+	/*background: var(--dark-blue-clr);*/
+	background: linear-gradient(
+		90deg, 
+		var(--dark-blue-clr),
+		var(--blue-clr),
+		var(--blue-clr),
+		var(--blue-clr),
+		var(--dark-blue-clr));
 	
 }
 
@@ -26,13 +33,13 @@ header {
 }
 
 .container {
-	background: linear-gradient(
+	/*background: linear-gradient(
 		90deg, 
 		var(--dark-blue-clr),
 		var(--blue-clr),
 		var(--blue-clr),
 		var(--blue-clr),
-		var(--dark-blue-clr));
+		var(--dark-blue-clr));*/
 	padding: 0;
 	
 	height: 80%;
