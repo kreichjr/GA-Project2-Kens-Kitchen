@@ -1,11 +1,11 @@
 <%- include('../partials/header.ejs') %>
 	<h1 class="p-5 pb-8">Log In</h1>
-	<div class="card w-100 align-items-center">
+	<div class="card w-50 align-items-center p-3">
 		<% if (message) { %>
 			<p class="reg-error"><%=message%></p>
 		<% } %>
 		
-		<form class="w-50" method="POST" action="/users/signin">
+		<form class="w-100" method="POST" action="/users/signin">
 			<div class="input-container">
 				<label for="username">Username</label>
 				<input class="w-100" type="text" name="username" id="username" autofocus required>

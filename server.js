@@ -54,7 +54,7 @@ app.use((req, res, next) => {
 })
 
 // Helper Functions for EJS
-app.locals.util = require('./public/js/app.js')
+app.locals.util = require('./public/js/ejsUtil.js')
 
 
 // Controllers
@@ -63,6 +63,9 @@ app.use('/ingredients', ingredientController)
 
 const userController = require('./controllers/userController')
 app.use('/users', userController)
+
+const recipeController = require('./controllers/recipeController')
+app.use('/recipes', recipeController)
 
 
 // App Start
