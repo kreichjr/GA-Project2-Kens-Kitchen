@@ -53,6 +53,23 @@ a {
 	color: rgba(255,255,255,.55);
 }
 
+.ingredient-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+
+}
+
+select {
+	width: 90%;
+}
+
+.ingredient-selector-display {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+}
+
 .input-container label {
 	display: block;
 	margin-top: .75rem;

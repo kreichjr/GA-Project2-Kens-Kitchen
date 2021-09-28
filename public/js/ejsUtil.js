@@ -16,6 +16,14 @@ module.exports = {
 			return ""
 		}
 		return "disabled"
+	},
+	buildIngredientOptions: (ingredients) => {
+		let options = ""
+		for (const ingredient of ingredients) {
+			options += `<option value="${ingredient.name}">`
+		}
+		console.log(options)
+		return options
 	}
 }
 

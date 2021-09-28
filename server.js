@@ -17,7 +17,7 @@ const SESSION_SECRET = process.env.SESSION_SECRET
 // Mongoose Variables
 const mongoose = require('mongoose')
 const db = mongoose.connection
-const mongoURI = process.env.MONGODB_URI
+const mongoURI = process.env.MONGODB_URI //|| "mongodb://localhost:27017/kitchen"
 
 
 // Mongoose Connection
@@ -43,10 +43,12 @@ app.use(session({
 	resave: false,
 	saveUninitialized: false
 }))
+
 app.use((req, res, next) => {
 	res.locals.currentUser = req.session.currentUser
 	next()
 })
+
 app.use((req, res, next) => {
 	res.locals.message = req.session.message
 	req.session.message = ''

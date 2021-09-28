@@ -1,4 +1,5 @@
 <%- include('../partials/header.ejs') %>
+<script type="text/javascript" src="/js/recipeUtil.js" defer></script>
 <h1 class="p-5 pb-8">New Recipe</h1>
 	<div class="card w-50 align-items-center p-3">
 		<form class="w-100" method="POST" action="/recipes">
@@ -7,8 +8,21 @@
 				<input class="w-100" type="text" name="name" id="name" autofocus required>
 			</div>
 			<div class="input-container">
-				<label for="ingredients">Ingredients</label>
-				<input class="w-100" type="" name="ingredients" id="ingredients" required>
+				<label for="ingredient-selector">Ingredients</label>
+				<div class="ingredient-container">
+					<div class="ingredient-selector-input">	
+						<input class="w-100" list="ingredient-selector" id="ingredient-selector-input">
+						<button type="button" class="w-100" id="add-ingredient-btn">Add Ingredient to Recipe</button><br>
+					</div>
+					<div class="ingredient-selector-display w-100">
+						<select multiple disabled>
+							
+						</select>
+					</div>
+					<datalist name="ingredient-selector" id="ingredient-selector">
+						<%- util.buildIngredientOptions(ingredients) %>
+					</datalist>
+				</div>	
 			</div>
 			<div class="input-container">
 				<label for="steps">Directions</label>
