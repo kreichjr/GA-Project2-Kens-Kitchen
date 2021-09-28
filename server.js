@@ -69,6 +69,10 @@ app.use('/users', userController)
 const recipeController = require('./controllers/recipeController')
 app.use('/recipes', recipeController)
 
+app.get('/', (req, res) => {
+	res.redirect('/ingredients')
+})
+
 
 // App Start
 app.listen(PORT, () => {
