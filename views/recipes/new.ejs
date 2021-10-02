@@ -9,15 +9,15 @@
 			</div>
 			<div class="input-container ingredient-container w-100">
 				<div class="ingredient-selector-container">
-					<label for="ingredient-selector-0">Ingredients</label>
-					<input list="ingredient-list" id="ingredient-selector-0" name="ingredientList" required>
+					<label for="ingredient-selector">Ingredients</label>
+					<input list="ingredient-list" id="ingredient-selector" >
 					<datalist id="ingredient-list">
 						<%-util.buildIngredientOptions(ingredients)%>
 					</datalist>
 				</div>
 				<div class="qty-container">
-					<label for="qty-0">Quantity</label>
-					<input class="w-100"type="number" id="qty-0" name="qtyList" required>
+					<label for="qty">Quantity</label>
+					<input class="w-100"type="number" id="qty" >
 				</div>	
 				<button type="button" id="add-ingredient-btn" class="btn btn-primary btn-sm mt-2">Add Ingredient</button>
 			</div>

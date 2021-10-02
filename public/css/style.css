@@ -53,6 +53,12 @@ a {
 	color: rgba(255,255,255,.55);
 }
 
+p {
+	font-size: .8rem;
+	padding-left: .3rem;
+	margin-bottom: .15rem;
+}
+
 .ingredient-container {
 	display: flex;
 	flex-direction: row;

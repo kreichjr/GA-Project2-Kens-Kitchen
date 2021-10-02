@@ -1,14 +1,46 @@
 const addBtn = document.querySelector('#add-ingredient-btn')
-const ingredientSelector = document.querySelector('#ingredient-selector-0')
+const ingredientSelectorEl = document.querySelector('#ingredient-selector')
+const qtyEl = document.querySelector('#qty')
+const ingredientSectionEl = document.querySelector('#current-ingredients')
 
+const ingredientArray = []
 
 addBtn.addEventListener('click', (event) => {
-	if (!ingredientSelector?.value) return
+	if (
+		!ingredientSelectorEl.value || 
+		!qtyEl.value || 
+		qtyEl.value < 1 || 
+		ingredientArray.includes(ingredientSelectorEl.value)) {
+			return console.log("Invalid")
+	}
+
+	ingredientArray.push(ingredientSelectorEl.value)
 	
-	console.log(ingredientSelector.value)
-	let newOption = document.createElement('option')
-	newOption.value = ingredientSelector.value
-	newOption.innerText = ingredientSelector.value
-	ingredientSelectorDisplay.append(newOption)
+	let ingredient = ingredientSelectorEl.value
+	let qty = qtyEl.value
+
+	const hiddenInputIngredient = document.createElement('input')
+	const hiddenInputQty = document.createElement('input')
+	const pTag = document.createElement('p')
+
+	pTag.innerText = `${ingredient} x${qty}`
+
+	hiddenInputQty.setAttribute("value", qty)
+	hiddenInputQty.setAttribute("type", "hidden")
+	hiddenInputQty.setAttribute("name", "qtyList")
+
+	hiddenInputIngredient.setAttribute("value", ingredient)
+	hiddenInputIngredient.setAttribute("type", "hidden")
+	hiddenInputIngredient.setAttribute("name", "ingredientList")
+
+	ingredientSectionEl.append(hiddenInputIngredient)
+	ingredientSectionEl.append(hiddenInputQty)
+	ingredientSectionEl.append(pTag)
+
+	document.querySelectorAll('datalist option').forEach((optionTag) => {
+		if (optionTag.value === ingredientSelectorEl.value) {
+			optionTag.remove()
+		}
+	})
 
 })

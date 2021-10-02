@@ -4,6 +4,9 @@ General Assembly Project 2 - Ken's Kitchen
 ## Project Choice (Tell us which project you're doing!)
 Ken's Kitchen
 
+## Project Link
+http://kenskitchen.herokuapp.com/ingredients
+
 ## Project Description
 
 Ken's Kitchen will be a fully RESTful app that will allow for tracking of the ingredients I have in my kitchen. The model will include:
@@ -22,7 +25,8 @@ Edit: GET /ingredients/:id/edit - Displays the edit ingredient form
 Update: PUT /ingredients/:id - Updates the ingredient in the db and redirects to ingredient show page
 Delete: DELETE /ingredients/:id - Removes an ingredient from the DB and redirects to the index
 
-
+## Technologies Used:
+Node.js, Express, Javascript, CSS, HTML, MongoDB
 
 ## Wireframes
 
