@@ -57,7 +57,10 @@ Add a "Give me a random recipe that I have the ingredients for" button
 
 
 ### Things to come back to
-- Fix issues with Recipes (May need to implement async await to properly assign id to recipe.ingredients)
+- Add more functionality to recipes (
+	* Allow for filtering for kitchen-ready recipes
+	* Add color coding styling on quantities
+)
 - Add some QoL updates to allow for redirect back to prev page when sign in is required
 
 

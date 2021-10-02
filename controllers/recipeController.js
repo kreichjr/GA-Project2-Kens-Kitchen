@@ -3,30 +3,45 @@ const router = express.Router()
 const Recipe = require('../models/recipes')
 const Ingredient = require('../models/ingredients')
 
-function getIngredientId(obj) {
+async function makeIngredients(ingredientList) {
+	const createdIngredientList = []
+	
+	for (const ingredient of ingredientList) {
+		let ingredientId = await getIngredientId(ingredient)
+		console.log('ingredientId', ingredientId)
 
-	Ingredient.findOne({name: obj.ingredient}, (err, foundIngredient) => {
-		if (err) return console.log(err)
-		if (foundIngredient) return foundIngredient.id
-		console.log("found ingredient and adding to list")
-		console.log(foundIngredient.id)
-		return createNewIngredientAndGetId(obj)
-	})	
+		const newIngredient = {
+			ingredient: await ingredientId,
+			requiredQty: ingredient.qty
+		}
+
+		createdIngredientList.push(newIngredient)
+	}
+
+	return createdIngredientList
 }
 
-async function createNewIngredientAndGetId(obj) {
+async function getIngredientId(ingredient){
+	
+	const foundIngredient = await Ingredient.findOne({name: ingredient.ingredient})
+	
+	if (foundIngredient) {
+		return foundIngredient.id
+	}
+
+	return createNewIngredientAndGetId(ingredient)
+}
+
+async function createNewIngredientAndGetId(ingredient) {
 	const newIngredient = {
-		name: obj.ingredient,
+		name: ingredient.ingredient,
 		qty: 0,
 		img: ""
 	}
 
-	Ingredient.create(newIngredient, (err, createdIngredient) => {
-		if (err) return console.log(err)
-		console.log("made new ingredient and returning id")
-		console.log(createdIngredient.id)
-		return createdIngredient.id
-	})
+	const createdIngredient = await Ingredient.create(newIngredient)
+
+	return createdIngredient.id
 }
 
 router.get('/', (req, res) => {
@@ -64,7 +79,7 @@ router.get('/:id', (req, res) => {
 			select: "username"
 		})
 		.populate({
-			path: "ingredients",
+			path: "ingredients.ingredient",
 			model: "Ingredient"
 		})
 		.exec((err, foundRecipe) => {
@@ -73,7 +88,7 @@ router.get('/:id', (req, res) => {
 	})
 })
 
-router.post('/', (req, res) => {	
+router.post('/', async (req, res) => {	
 
 	const ingredientList = []
 
@@ -92,16 +107,7 @@ router.post('/', (req, res) => {
 		ingredientList.push(JSON.parse(req.body.ingredients))
 	}
 
-	ingredientList.forEach((ingredient) => {
-		const newIngredient = {
-			ingredient: getIngredientId(ingredient),
-			requiredQty: ingredient.qty
-		}
-		console.log("NEW INGREDIENT: ", newIngredient)
-		newRecipe.ingredients.push(newIngredient)
-	})
-
-	
+	newRecipe.ingredients = await makeIngredients(ingredientList)
 
 	Recipe.create(newRecipe, (err, createdRecipe) => {
 		if (err) return res.send(err)
