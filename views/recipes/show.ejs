@@ -1,0 +1,22 @@
+<%- include('../partials/header.ejs') %>
+	<h1 class="p-5 pb-8"><%=recipe.name%></h1>
+	<div class="card align-items-center" style="width: 100%">
+		<div class="card-body d-flex flex-column align-items-center">
+			<ul>
+				<% for (const ingredient of recipe.ingredients) {%>
+					<li><%=ingredient%> x<%=ingredient.requiredQty%></li>
+				<% } %>
+			</ul>
+
+			<p class="card-text">Directions: <%= recipe.steps %></p>
+			<p class="cart-text">Created By: <%= recipe.createdBy.username %></p>
+			<form 
+				method="POST" 
+				action="/recipes/<%=recipe.id%>?_method=DELETE">
+				<button class="btn btn-danger btn-sm" <%-util.enableIfAdmin(currentUser)%>>Delete</button>
+			</form>
+		</div>
+
+		
+	</div>
+<%- include('../partials/footer.ejs') %>

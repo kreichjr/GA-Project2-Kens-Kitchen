@@ -7,8 +7,9 @@ function getIngredientId(obj) {
 
 	Ingredient.findOne({name: obj.ingredient}, (err, foundIngredient) => {
 		if (err) return console.log(err)
-		if (foundIngredient) return foundIngredient._id
+		if (foundIngredient) return foundIngredient.id
 		console.log("found ingredient and adding to list")
+		console.log(foundIngredient.id)
 		return createNewIngredientAndGetId(obj)
 	})	
 }
@@ -23,7 +24,8 @@ async function createNewIngredientAndGetId(obj) {
 	Ingredient.create(newIngredient, (err, createdIngredient) => {
 		if (err) return console.log(err)
 		console.log("made new ingredient and returning id")
-		return createdIngredient._id
+		console.log(createdIngredient.id)
+		return createdIngredient.id
 	})
 }
 
@@ -55,7 +57,17 @@ router.get('/new', (req, res) => {
 })
 
 router.get('/:id', (req, res) => {
-	Recipe.findById(req.params.id, (err, foundRecipe) => {
+	Recipe.findById(req.params.id)
+		.populate({
+			path: "createdBy",
+			model: "User",
+			select: "username"
+		})
+		.populate({
+			path: "ingredients",
+			model: "Ingredient"
+		})
+		.exec((err, foundRecipe) => {
 		if (err) return res.send(err)
 		res.render('recipes/show.ejs', {recipe: foundRecipe})
 	})
@@ -85,11 +97,11 @@ router.post('/', (req, res) => {
 			ingredient: getIngredientId(ingredient),
 			requiredQty: ingredient.qty
 		}
-		console.log("adding ingredient to master list")
+		console.log("NEW INGREDIENT: ", newIngredient)
 		newRecipe.ingredients.push(newIngredient)
 	})
 
-	console.log("creating recipe")
+	
 
 	Recipe.create(newRecipe, (err, createdRecipe) => {
 		if (err) return res.send(err)
