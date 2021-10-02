@@ -7,28 +7,32 @@
 				<label for="name">Name</label>
 				<input class="w-100" type="text" name="name" id="name" autofocus required>
 			</div>
-			<div class="input-container">
-				<label for="ingredient-selector">Ingredients</label>
-				<div class="ingredient-container">
-					<div class="ingredient-selector-input">	
-						<input class="w-100" list="ingredient-selector" id="ingredient-selector-input">
-						<button type="button" class="w-100" id="add-ingredient-btn">Add Ingredient to Recipe</button><br>
-					</div>
-					<div class="ingredient-selector-display w-100">
-						<select multiple disabled>
-							
-						</select>
-					</div>
-					<datalist name="ingredient-selector" id="ingredient-selector">
-						<%- util.buildIngredientOptions(ingredients) %>
+			<div class="input-container ingredient-container w-100">
+				<div class="ingredient-selector-container">
+					<label for="ingredient-selector-0">Ingredients</label>
+					<input list="ingredient-list" id="ingredient-selector-0" name="ingredientList" required>
+					<datalist id="ingredient-list">
+						<%-util.buildIngredientOptions(ingredients)%>
 					</datalist>
+				</div>
+				<div class="qty-container">
+					<label for="qty-0">Quantity</label>
+					<input class="w-100"type="number" id="qty-0" name="qtyList" required>
 				</div>	
+				<button type="button" id="add-ingredient-btn" class="btn btn-primary btn-sm mt-2">Add Ingredient</button>
 			</div>
+			<section id="current-ingredients">
+				
+			</section>
 			<div class="input-container">
 				<label for="steps">Directions</label>
 				<textarea id="steps" name="steps" class="w-100" required></textarea>
 			</div>
+
 			<button type="submit" class="btn btn-primary w-100 mt-2">Add Recipe</button>
 		</form>
 	</div>
 <%- include('../partials/footer.ejs') %>
+
+
+<!-- <button class="btn btn-danger btn-sm" type="button">Remove</button> -->
