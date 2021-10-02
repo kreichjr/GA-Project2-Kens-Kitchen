@@ -44,9 +44,20 @@ router.get('/', (req, res) => {
 })
 
 router.get('/new', (req, res) => {
+	if (!req.session.currentUser) {
+		req.session.message = "You must be logged in to create a recipe."
+		res.redirect('/users/signin')
+	}
 	Ingredient.find({}, (err, ingredients) => {
 		if (err) return res.send(err)
 		res.render('recipes/new.ejs', {ingredients})
+	})
+})
+
+router.get('/:id', (req, res) => {
+	Recipe.findById(req.params.id, (err, foundRecipe) => {
+		if (err) return res.send(err)
+		res.render('recipes/show.ejs', {recipe: foundRecipe})
 	})
 })
 
@@ -81,6 +92,13 @@ router.post('/', (req, res) => {
 
 	})
 
+})
+
+router.delete('/:id', (req, res) => {
+	Recipe.findByIdAndDelete(req.params.id, (err, deletedRecipe) => {
+		if (err) return res.send(err)
+		res.redirect('/recipes')
+	})
 })
 
 module.exports = router

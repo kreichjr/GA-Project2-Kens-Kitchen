@@ -7,7 +7,6 @@
 					<th scope="col">Recipe</th>
 					<th scope="col">Created By</th>
 					<th scope="col">Created On</th>
-					<th scope="col">Edit</th>
 					<th scope="col">Delete</th>
 				</tr>
 			</thead>
@@ -17,10 +16,6 @@
 						<td><a class="" href="/recipes/<%=recipe.id%>"><%= recipe.name %></a></td>
 						<td><%= recipe.createdBy.username %></td>
 						<td><%= recipe.createdAt.toDateString() + " " + recipe.createdAt.toTimeString() %></td>
-						<td>
-							<form method="GET" action="/recipes/<%=recipe.id%>/edit"><button class="btn btn-primary btn-sm" <%-util.enableIfAdmin(currentUser)%>>Edit</button>
-							</form>
-						</td>
 						<td>
 							<form 
 								method="POST" 
