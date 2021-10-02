@@ -72,9 +72,13 @@ router.post('/', (req, res) => {
 		createdBy: req.session.currentUser._id
 	}
 	
-	req.body.ingredients.forEach((ingredient) => {
-		ingredientList.push(JSON.parse(ingredient))
-	})
+	if (Array.isArray(req.body.ingredients)) {
+		req.body.ingredients.forEach((ingredient) => {
+			ingredientList.push(JSON.parse(ingredient))
+		})
+	} else {
+		ingredientList.push(JSON.parse(req.body.ingredients))
+	}
 
 	ingredientList.forEach((ingredient) => {
 		const newIngredient = {
@@ -89,7 +93,7 @@ router.post('/', (req, res) => {
 
 	Recipe.create(newRecipe, (err, createdRecipe) => {
 		if (err) return res.send(err)
-
+		res.redirect('/recipes')
 	})
 
 })
