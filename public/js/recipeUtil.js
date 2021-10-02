@@ -19,28 +19,32 @@ addBtn.addEventListener('click', (event) => {
 	let ingredient = ingredientSelectorEl.value
 	let qty = qtyEl.value
 
-	const hiddenInputIngredient = document.createElement('input')
-	const hiddenInputQty = document.createElement('input')
 	const pTag = document.createElement('p')
+	const hiddenIngredient = document.createElement('input')
 
 	pTag.innerText = `${ingredient} x${qty}`
 
-	hiddenInputQty.setAttribute("value", qty)
-	hiddenInputQty.setAttribute("type", "hidden")
-	hiddenInputQty.setAttribute("name", "qtyList")
+	const newIngredient = {
+		ingredient,
+		qty
+	}
 
-	hiddenInputIngredient.setAttribute("value", ingredient)
-	hiddenInputIngredient.setAttribute("type", "hidden")
-	hiddenInputIngredient.setAttribute("name", "ingredientList")
+	hiddenIngredient.setAttribute('type', 'hidden')
+	hiddenIngredient.setAttribute('name', 'ingredients')
+	hiddenIngredient.value = JSON.stringify(newIngredient)
 
-	ingredientSectionEl.append(hiddenInputIngredient)
-	ingredientSectionEl.append(hiddenInputQty)
+	ingredientSectionEl.append(hiddenIngredient)
 	ingredientSectionEl.append(pTag)
+
+
 
 	document.querySelectorAll('datalist option').forEach((optionTag) => {
 		if (optionTag.value === ingredientSelectorEl.value) {
 			optionTag.remove()
 		}
 	})
+
+	ingredientSelectorEl.value = ""
+	qtyEl.value = ""
 
 })
